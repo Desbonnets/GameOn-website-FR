@@ -200,6 +200,31 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+/* Voici les règles de mise en forme pour les champs invalides */
+input.invalid{
+  box-shadow: 0 0 3px 3px red;
+}
+
+input:focus.invalid {
+  outline: none;
+}
+
+/* Voici les règles utilisées pour les messages d'erreur */
+.error {
+  padding: 0;
+
+  font-size: 14px;
+  color: white;
+  border-radius: 0 0 5px 5px;
+
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 2px;
+  border: 1px solid red;
+}
 .text-control {
   margin: 0;
   padding: 8px;
@@ -270,7 +295,10 @@ input[data-error]::after {
   opacity: 0;
 }
 .checkbox-input {
-  display: none;
+  /*display: none;*/
+  position: absolute;
+  height: auto;
+  opacity: 0;
 }
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
@@ -296,6 +324,7 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
+
 .close {
   position: absolute;
   right: 15px;
