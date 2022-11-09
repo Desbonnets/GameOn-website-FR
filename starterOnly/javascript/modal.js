@@ -26,6 +26,9 @@ function launchModal() {
 function closeModal() {
   modalbg.style.display = "none";
 }
+function closeValidation() {
+  window.location.href = 'index.html';
+}
 
 
 const form  = document.getElementsByTagName('form')[0];
@@ -46,7 +49,7 @@ form.addEventListener("submit", function (event) {
   if (!prenom.validity.valid || prenom.value == "") {
 
     prenom.className = "text-control invalid";
-    errorP.innerHTML = "Veuillez renseigner votre prénom (2 charactère minimum).";
+    errorP.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du prenom.";
     errorP.className = "error active";
     // Et on empêche l'envoi des données du formulaire
     event.preventDefault();
@@ -68,7 +71,7 @@ form.addEventListener("submit", function (event) {
 
   if (!nom.validity.valid || nom.value == "") {
     nom.className = "text-control invalid";
-    errorN.innerHTML = "Veuillez renseigner votre nom (2 charactère minimum).";
+    errorN.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
     errorN.className = "error active";
 
     event.preventDefault();
@@ -82,7 +85,7 @@ const emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+
 
 email.addEventListener("input", function (event) {
 
-  if (email.validity.valid || emailRegExp.test(email.value)) {
+  if (email.validity.valid && emailRegExp.test(email.value)) {
     email.className = "text-control valid";
     errorE.innerHTML = "";
     errorE.className = "error";
@@ -114,7 +117,7 @@ form.addEventListener("submit", function (event) {
 
   if (!datenaissance.validity.valid || datenaissance.value == "") {
     datenaissance.className = "text-control invalid";
-    errorD.innerHTML = "Veuillez renseigner votre date de naissance.";
+    errorD.innerHTML = "Vous devez entrer votre date de naissance.";
     errorD.className = "error active";
 
     event.preventDefault();
@@ -143,77 +146,72 @@ form.addEventListener("submit", function (event) {
   }
 }, false);
 
-/*const localisation = document.getElementById('localisation');
-const errorL = document.querySelector('#errorlocalisation');
-
-localisation.addEventListener("input", function (event) {
-
-  if (localisation.validity.valid) {
-
-    errorL.innerHTML = "";
-    errorL.className = "error";
-  }
-}, false);
-form.addEventListener("submit", function (event) {
-
-  if (!localisation.validity.valid || localisation != "") {
-
-    errorL.innerHTML = "Veuillez renseigner le tournoi.";
-    errorL.className = "error active";
-
-    event.preventDefault();
-  }
-}, false);*/
-
-var conditions = document.getElementById('conditions');
-var errorC = document.querySelector('#errorconditions');
+const conditions = document.getElementById('conditions');
+const errorC = document.querySelector('#errorconditions');
 
 conditions.addEventListener("input", function (event) {
 
   if (conditions.validity.valid) {
-    conditions.className = "text-control valid";
+    conditions.className = "checkbox-input valid";
     errorC.innerHTML = "";
     errorC.className = "error";
   }
 }, false);
 form.addEventListener("submit", function (event) {
-
-  if (!conditions.validity.valid) {
-    conditions.className = "text-control invalid";
-    errorC.innerHTML = "Veuillez indiquer que vous acceptez les conditions d'utilisation";
+  if (!conditions.validity.valid || !conditions.checked == true ) {
+    conditions.className = "checkbox-input invalid";
+    errorC.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions";
     errorC.className = "error active";
 
     event.preventDefault();
   }
 }, false);
 
-/*const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const prenom = urlParams.get('first')
-const nom = urlParams.get('last')
-const email = urlParams.get('email')
-const birthdate = urlParams.get('birthdate')
-const nbTournois = urlParams.get('quantity')
-const localisation = urlParams.get('location')
-const conditions = urlParams.get('conditions')
-const newletter = urlParams.get('newletter')
-if (prenom != "aa" && nom != null && prenom.length >= 2 && nom.length >= 2 && email != null && birthdate != null && nbTournois != null && localisation != null && conditions == "on"){
-  alert("Merci " + prenom + " " + nom +"! Votre réservation a été reçue.");
-  window.location.href = 'index.html';
-}*/
+const errorL = document.querySelector('#errorlocalisation');
 
-/*document.addEventListener("DOMContentLoaded", function() {
-  var elements = document.getElementsByTagName("INPUT");
+let tournoi = "";
+const len = document.reserve.localisation.length;
 
-  for (var i = 0; i < elements.length; i++) {
-      elements[i].oninvalid = function(e) {
-          e.target.setCustomValidity("test1");
-          if (!e.target.validity.valid) {
-              e.target.setCustomValidity("");
-          }
-      };
-      elements[i].oninput = function(e) {
-          e.target.setCustomValidity("test3");
-      };
+form.addEventListener("submit", function (event) {
+for (i = 0; i < len; i++) {
+    if (document.reserve.localisation[i].checked) {
+        tournoi = document.reserve.localisation[i].value
+    }
+}
+  if (tournoi == "") {
+    errorL.innerHTML = "Vous devez choisir une option.";
+    errorL.className = "error active";
+    event.preventDefault();
+      return false;
+  } else {
+    errorL.innerHTML = "";
+    errorL.className = "error";
   }
-})*/
+},false);
+
+function validation() {
+  
+    if(tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "aaa"){
+      
+    }else{
+      var valide = document.getElementById('valide');
+      valide.innerHTML = "Le formulaire est invalide";
+      valide.className = "error active";
+      return false;
+    }
+}
+
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const urlprenom = urlParams.get('prenom')
+const urlnom = urlParams.get('nom')
+const urlemail = urlParams.get('email')
+const urlbirthdate = urlParams.get('datenaissance')
+const urlnbTournois = urlParams.get('tournois')
+const urllocalisation = urlParams.get('localisation')
+const urlconditions = urlParams.get('conditions')
+const urlnewletter = urlParams.get('newletter')
+if (urlprenom != "aa" && urlnom != null && urlprenom.length >= 2 && urlnom.length >= 2 && urlemail != null && urlbirthdate != null && urlnbTournois != null && urllocalisation != null && urlconditions == "on"){
+  document.getElementById("validation").innerHTML = '<div class="bground" id="bground" style="display:block;"><div class="content"><span class="close" id="closeValide"></span><div class="modal-body">Merci ' + urlprenom + ' ' + urlnom +'! Votre réservation a été reçue.</div></div></div>';
+  document.getElementById("closeValide").addEventListener("click", closeValidation);
+}

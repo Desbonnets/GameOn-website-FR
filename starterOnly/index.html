@@ -26,6 +26,7 @@
     </div>
     </div>
   </div>
+  <div id="validation"></div>
     <main>
       <div class="hero-section">
         <div class="hero-content">
@@ -52,7 +53,7 @@
         <div class="content">
           <span class="close" id="close"></span>
           <div class="modal-body">
-            <form name="reserve" action="index.html" method="get" onsubmit="return validation()">
+            <form name="reserve" method="get" onsubmit="return validation()">
               <div class="formData">
                 <label for="prenom">Prénom</label><br>
                 <input class="text-control" type="text" id="prenom" name="prenom" minlength="2"/><br>
@@ -65,7 +66,7 @@
               </div>
               <div class="formData">
                 <label for="email">E-mail</label>
-                <input class="text-control" type="email" id="email" name="email"/><br>
+                <input class="text-control" type="email" id="email" name="email" validationMessage="false"/><br>
                 <span class="error" id="erroremail" aria-live="polite"></span>
               </div>
               <div class="formData">
@@ -91,11 +92,11 @@
                 <input class="checkbox-input" type="radio" id="localisation5" name="localisation" value="Boston"/>
                 <label class="checkbox-label" for="localisation5"><span class="checkbox-icon"></span>Boston</label>
                 <input class="checkbox-input" type="radio" id="localisation6" name="localisation" value="Portland"/>
-                <label class="checkbox-label" for="localisation6"><span class="checkbox-icon"></span>Portland</label>
+                <label class="checkbox-label" for="localisation6"><span class="checkbox-icon"></span>Portland</label><br>
                 <span class="error" id="errorlocalisation" aria-live="polite"></span>
               </div>
               <div class="formData">
-                <input class="checkbox-input" type="checkbox" id="conditions" name="conditions" checked required/>
+                <input class="checkbox-input" type="checkbox" id="conditions" name="conditions" checked/>
                 <label class="checkbox2-label" for="conditions"><span class="checkbox-icon"></span>J'ai lu et accepté les conditions d'utilisation.</label><br>
                 <span class="error" id="errorconditions" aria-live="polite"></span>
                 <input class="checkbox-input" type="checkbox" id="newletter" name="newletter"/>
@@ -103,6 +104,7 @@
               </div>
               <input class="btn-submit" type="submit" class="button" id="submit" name="submit" value="C'est parti"/>
             </form>
+            <span id="valide"></span>
           </div>
         </div>
       </div>

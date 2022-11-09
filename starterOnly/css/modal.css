@@ -223,7 +223,20 @@ input:focus.invalid {
 
 .error.active {
   padding: 2px;
-  border: 1px solid red;
+  color: red;
+}
+.valide {
+  padding: 0;
+  font-size: 14px;
+  color: white;
+  border-radius: 0 0 5px 5px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.valide.active {
+  padding: 2px;
+  color: green;
 }
 .text-control {
   margin: 0;
