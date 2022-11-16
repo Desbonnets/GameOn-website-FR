@@ -189,6 +189,7 @@ for (i = 0; i < len; i++) {
   }
 },false);
 
+// Vérifie si les input sont correcte si il ne le sont pas affiche un message d'erreur
 function validation() {
   
     if(tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "aaa"){
@@ -201,6 +202,7 @@ function validation() {
     }
 }
 
+//récupere les données du formulaire qui sont dans l'url et j'affiche un message de confirmation
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const urlprenom = urlParams.get('prenom')
