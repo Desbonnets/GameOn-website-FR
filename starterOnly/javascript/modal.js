@@ -12,6 +12,7 @@ const modalbg = document.getElementById("bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const close = document.getElementById("close");
+const valide = document.getElementById('valide');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -192,10 +193,11 @@ form.addEventListener("submit", function (event) {
 // Vérifie si les input sont correcte si il ne le sont pas affiche un message d'erreur
 function validation() {
 
-  if (tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "aaa") {
+  if (tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "") {
     return true;
-  } else {
-
+  } else if (tournoi == "" && conditions.checked == false && tournois.value == "" && datenaissance.value == "" && emailRegExp.test(email.value) && nom.value == "" && prenom.value == "") {
+    valide.innerHTML = "Le formulaire est invalide";
+    valide.className = "error active";
     return false;
   }
 }
