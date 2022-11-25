@@ -61,7 +61,7 @@ const nom = document.getElementById('nom');
 const errorN = document.querySelector('#errornom');
 
 nom.addEventListener("input", function (event) {
-
+// on vérifie la validité du champ
   if (nom.validity.valid) {
     nom.className = "text-control valid";
     errorN.innerHTML = "";
@@ -69,7 +69,7 @@ nom.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
-
+// on vérifie la validité du champ
   if (!nom.validity.valid || nom.value == "") {
     nom.className = "text-control invalid";
     errorN.innerHTML = "Veuillez entrer 2 caractères ou plus pour le champ du nom.";
@@ -81,11 +81,11 @@ form.addEventListener("submit", function (event) {
 
 const email = document.getElementById('email');
 const errorE = document.getElementById('erroremail');
-
+//le string pour la vérification de l'email
 const emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 email.addEventListener("input", function (event) {
-
+// on vérifie la validité du champ
   if (email.validity.valid && emailRegExp.test(email.value)) {
     email.className = "text-control valid";
     errorE.innerHTML = "";
@@ -93,7 +93,7 @@ email.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
-
+// on vérifie la validité du champ
   if (!email.validity.valid || !emailRegExp.test(email.value)) {
     email.className = "text-control invalid";
     errorE.innerHTML = "Veuillez renseigner une adresse e-mail valide (nom@exemple.fr).";
@@ -107,7 +107,7 @@ const datenaissance = document.getElementById('datenaissance');
 const errorD = document.querySelector('#errordate');
 
 datenaissance.addEventListener("input", function (event) {
-
+// on vérifie la validité du champ
   if (datenaissance.validity.valid) {
     datenaissance.className = "text-control valid";
     errorD.innerHTML = "";
@@ -115,7 +115,7 @@ datenaissance.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
-
+// on vérifie la validité du champ
   if (!datenaissance.validity.valid || datenaissance.value == "") {
     datenaissance.className = "text-control invalid";
     errorD.innerHTML = "Vous devez entrer votre date de naissance.";
@@ -129,7 +129,7 @@ const tournois = document.getElementById('tournois');
 const errorT = document.querySelector('#errortournois');
 
 tournois.addEventListener("input", function (event) {
-
+// on vérifie la validité du champ
   if (tournois.validity.valid) {
     tournois.className = "text-control valid";
     errorT.innerHTML = "";
@@ -137,7 +137,7 @@ tournois.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
-
+// on vérifie la validité du champ
   if (!tournois.validity.valid || tournois.value == "") {
     tournois.className = "text-control invalid";
     errorT.innerHTML = "Veuillez renseigner le nombre de tournois.";
@@ -151,7 +151,7 @@ const conditions = document.getElementById('conditions');
 const errorC = document.querySelector('#errorconditions');
 
 conditions.addEventListener("input", function (event) {
-
+// on vérifie la validité du champ
   if (conditions.validity.valid) {
     conditions.className = "checkbox-input valid";
     errorC.innerHTML = "";
@@ -159,6 +159,7 @@ conditions.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
+  // on vérifie la validité du champ
   if (!conditions.validity.valid || !conditions.checked == true) {
     conditions.className = "checkbox-input invalid";
     errorC.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions";
@@ -174,11 +175,14 @@ let tournoi = "";
 const len = document.reserve.localisation.length;
 
 form.addEventListener("submit", function (event) {
+  //on récupere touts les tournois
   for (i = 0; i < len; i++) {
+    //on vérifie si il sont cochez
     if (document.reserve.localisation[i].checked) {
       tournoi = document.reserve.localisation[i].value
     }
   }
+  // on vérifie la validité du champ
   if (tournoi == "") {
     errorL.innerHTML = "Vous devez choisir une option.";
     errorL.className = "error active";
@@ -192,7 +196,7 @@ form.addEventListener("submit", function (event) {
 
 // Vérifie si les input sont correcte si il ne le sont pas affiche un message d'erreur
 function validation() {
-
+  //on vérifie que touts les champs soit valide
   if (tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "") {
     return true;
   } else if (tournoi == "" && conditions.checked == false && tournois.value == "" && datenaissance.value == "" && emailRegExp.test(email.value) && nom.value == "" && prenom.value == "") {
@@ -213,7 +217,8 @@ const urlnbTournois = urlParams.get('tournois')
 const urllocalisation = urlParams.get('localisation')
 const urlconditions = urlParams.get('conditions')
 const urlnewletter = urlParams.get('newletter')
-if (urlprenom != "aaa" && urlnom != null && urlprenom.length >= 2 && urlnom.length >= 2 && urlemail != null && urlbirthdate != null && urlnbTournois != null && urllocalisation != null && urlconditions == "on") {
+//on vérifie les variables
+if (urlprenom != null && urlnom != null && urlprenom.length >= 2 && urlnom.length >= 2 && urlemail != null && urlbirthdate != null && urlnbTournois != null && urllocalisation != null && urlconditions == "on") {
   document.getElementById("validation").innerHTML = '<div class="bground" id="bground" style="display:block;"><div class="content"><span class="close" id="closeValide"></span><div class="modal-body">Merci ' + urlprenom + ' ' + urlnom + '! Votre réservation a été reçue.<button id="Fermer" class="btn-signup modal-btn btn-fermer">Fermer</button></div></div></div>';
   document.getElementById("closeValide").addEventListener("click", closeValidation);
   document.getElementById("Fermer").addEventListener("click", closeValidation)
