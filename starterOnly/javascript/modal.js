@@ -31,7 +31,7 @@ function closeValidation() {
 }
 
 
-const form  = document.getElementsByTagName('form')[0];
+const form = document.getElementsByTagName('form')[0];
 const prenom = document.getElementById('prenom');
 const errorP = document.querySelector('#errorprenom');
 
@@ -158,7 +158,7 @@ conditions.addEventListener("input", function (event) {
   }
 }, false);
 form.addEventListener("submit", function (event) {
-  if (!conditions.validity.valid || !conditions.checked == true ) {
+  if (!conditions.validity.valid || !conditions.checked == true) {
     conditions.className = "checkbox-input invalid";
     errorC.innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions";
     errorC.className = "error active";
@@ -173,33 +173,31 @@ let tournoi = "";
 const len = document.reserve.localisation.length;
 
 form.addEventListener("submit", function (event) {
-for (i = 0; i < len; i++) {
+  for (i = 0; i < len; i++) {
     if (document.reserve.localisation[i].checked) {
-        tournoi = document.reserve.localisation[i].value
+      tournoi = document.reserve.localisation[i].value
     }
-}
+  }
   if (tournoi == "") {
     errorL.innerHTML = "Vous devez choisir une option.";
     errorL.className = "error active";
     event.preventDefault();
-      return false;
+    return false;
   } else {
     errorL.innerHTML = "";
     errorL.className = "error";
   }
-},false);
+}, false);
 
 // Vérifie si les input sont correcte si il ne le sont pas affiche un message d'erreur
 function validation() {
-  
-    if(tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "aaa"){
-      
-    }else{
-      var valide = document.getElementById('valide');
-      valide.innerHTML = "Le formulaire est invalide";
-      valide.className = "error active";
-      return false;
-    }
+
+  if (tournoi != "" && conditions.checked == true && tournois.value != "" && datenaissance.value != "" && emailRegExp.test(email.value) && nom.value != "" && prenom.value != "aaa") {
+    return true;
+  } else {
+
+    return false;
+  }
 }
 
 //récupere les données du formulaire qui sont dans l'url et j'affiche un message de confirmation
@@ -213,7 +211,8 @@ const urlnbTournois = urlParams.get('tournois')
 const urllocalisation = urlParams.get('localisation')
 const urlconditions = urlParams.get('conditions')
 const urlnewletter = urlParams.get('newletter')
-if (urlprenom != "aa" && urlnom != null && urlprenom.length >= 2 && urlnom.length >= 2 && urlemail != null && urlbirthdate != null && urlnbTournois != null && urllocalisation != null && urlconditions == "on"){
-  document.getElementById("validation").innerHTML = '<div class="bground" id="bground" style="display:block;"><div class="content"><span class="close" id="closeValide"></span><div class="modal-body">Merci ' + urlprenom + ' ' + urlnom +'! Votre réservation a été reçue.</div></div></div>';
+if (urlprenom != "aaa" && urlnom != null && urlprenom.length >= 2 && urlnom.length >= 2 && urlemail != null && urlbirthdate != null && urlnbTournois != null && urllocalisation != null && urlconditions == "on") {
+  document.getElementById("validation").innerHTML = '<div class="bground" id="bground" style="display:block;"><div class="content"><span class="close" id="closeValide"></span><div class="modal-body">Merci ' + urlprenom + ' ' + urlnom + '! Votre réservation a été reçue.<button id="Fermer" class="btn-signup modal-btn btn-fermer">Fermer</button></div></div></div>';
   document.getElementById("closeValide").addEventListener("click", closeValidation);
+  document.getElementById("Fermer").addEventListener("click", closeValidation)
 }
