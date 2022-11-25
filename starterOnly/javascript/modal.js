@@ -82,7 +82,7 @@ form.addEventListener("submit", function (event) {
 const email = document.getElementById('email');
 const errorE = document.getElementById('erroremail');
 //le string pour la vérification de l'email
-const emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const emailRegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 email.addEventListener("input", function (event) {
 // on vérifie la validité du champ
@@ -127,10 +127,12 @@ form.addEventListener("submit", function (event) {
 
 const tournois = document.getElementById('tournois');
 const errorT = document.querySelector('#errortournois');
+const NumRegEx = /^[0-9]*$/;
 
 tournois.addEventListener("input", function (event) {
 // on vérifie la validité du champ
-  if (tournois.validity.valid) {
+
+  if (tournois.validity.valid && NumRegEx.test(tournois.value)) {
     tournois.className = "text-control valid";
     errorT.innerHTML = "";
     errorT.className = "error";
@@ -138,7 +140,7 @@ tournois.addEventListener("input", function (event) {
 }, false);
 form.addEventListener("submit", function (event) {
 // on vérifie la validité du champ
-  if (!tournois.validity.valid || tournois.value == "") {
+  if (!tournois.validity.valid || !NumRegEx.test(tournois.value) || tournois.value == "") {
     tournois.className = "text-control invalid";
     errorT.innerHTML = "Veuillez renseigner le nombre de tournois.";
     errorT.className = "error active";
